@@ -1,0 +1,40 @@
+@startuml
+!include <C4/C4_Context>
+!include <C4/C4_Container>
+
+title Архитектура MVP (To-Be)
+
+Person_Ext(patient, "Пациент", "Записывается на приём через веб-портал")
+Person(reception, "Администратор (ресепшен)", "Получает уведомления, управляет расписанием")
+
+System_Boundary(medicamente, "Система Медикаменте (MVP)") {
+  Container(webPortal, "Веб-портал", "Frontend App", "Пациент видит доступные слоты и записывается")
+  Container(appServer, "Сервер приложений", "Backend", "Обрабатывает логику записи, уведомления, RBAC/ABAC")
+  ContainerDb(db, "База данных", "SQL Database", "Хранение конфиденциальных данных (шифрование)")
+  Container(notifyService, "Сервис уведомлений", "Internal Service", "Отправляет уведомления ресепшену")
+}
+
+System_Ext(emailSystem, "Корпоративная почта / Push канал", "SMTP/HTTPS", "Для передачи уведомлений")
+
+Rel(patient, webPortal, "Ввод персональных данных (HTTPS)")
+Rel(webPortal, appServer, "Создание записи на приём (HTTPS)")
+Rel(appServer, db, "Сохранение/чтение данных (TLS, шифрование на уровне БД)")
+Rel(appServer, notifyService, "Уведомление о новой записи")
+Rel(notifyService, emailSystem, "Отправка письма или push-сообщения (TLS)")
+Rel(notifyService, reception, "Администратор получает уведомление")
+Rel(reception, webPortal, "Внутренний интерфейс (HTTPS)")
+
+note bottom of db
+  - Данные тегируются (PII, Medical)
+  - Шифрование при хранении (TDE)
+  - Ограниченный доступ (только через backend)
+end note
+
+note bottom of appServer
+  - Реализует RBAC/ABAC
+  - Логирует доступ к данным
+  - Проверяет право на доступ к мед.информации
+end note
+
+@enduml
+

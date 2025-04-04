@@ -1,0 +1,15 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+
+Person(doctor, "Doctor", "Врач")
+System_Boundary(s1, "Lab Processing") {
+  System(lab, "Laboratory", "Медицинская лаборатория")
+  System_Ext(dataFile, "Data File", "Результаты анализов")
+  System_Ext(registry, "Registry by Date", "Реестр анализов по дате")
+}
+
+Rel(doctor, lab, "Передаёт направление")
+Rel(lab, dataFile, "Загружает результат анализа")
+Rel(lab, registry, "Обновляет реестр по дате")
+@enduml
