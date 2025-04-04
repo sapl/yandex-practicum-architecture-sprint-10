@@ -24,7 +24,7 @@
 
 ## 2. Диаграмма контейнеров (C4)
 
-Ниже описана общая схема MVP. Файл с PlantUML-диаграммой — [**container_mvp.puml**](container_mvp.puml).
+Ниже описана общая схема MVP. Файл с PlantUML-диаграммой — [**container_mvp.puml**](diagrams/container_mvp.puml).
 
 **Основные контейнеры**:
 1. **Веб-портал**: фронтенд-приложение, где пациент видит расписание и оформляет запись.
@@ -79,5 +79,5 @@
 - **Соответствие законам**: Реализованы принципы Data Minimization (собираем лишь нужное), Privacy by Design, учитываем запросы на удаление (в рамках требуемых норм).
 
 ### Ссылка на диаграмму PlantUML
-- [container_mvp.puml](container_mvp.puml)
+- [container_mvp.puml](diagrams/container_mvp.puml)
  
