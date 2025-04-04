@@ -1,0 +1,17 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person(cashier, "Cashier", "Кассир")
+Person(patient, "Patient", "Пациент")
+System_Boundary(s1, "Payments") {
+  System(kkm, "ККМ", "Контрольно-кассовая машина")
+  System(oneC, "1С Бухгалтерия", "Учёт оплат")
+  System(excel, "Excel Payment File", "Дублирующий учёт")
+}
+
+Rel(patient, cashier, "Оплачивает услуги")
+Rel(cashier, kkm, "Фиксирует оплату")
+Rel(cashier, oneC, "Вносит в 1С")
+Rel(cashier, excel, "Дублирует в Excel")
+@enduml
+

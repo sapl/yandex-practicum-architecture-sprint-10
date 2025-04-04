@@ -1,0 +1,14 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+
+Person(doctor, "Doctor", "Специалист-врач")
+System_Boundary(s1, "Doctor Visit") {
+  System_Ext(journal, "Excel Journal", "Журнал приёма врача")
+  System_Ext(file_data, "Data File", "Файл с результатами приёма")
+}
+
+Rel(doctor, journal, "Записывает результаты приёма")
+Rel(doctor, file_data, "Создаёт или обновляет файл пациента")
+@enduml
+

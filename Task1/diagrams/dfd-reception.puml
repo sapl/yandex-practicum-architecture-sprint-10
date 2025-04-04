@@ -1,0 +1,19 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+Person(admin, "Administrator", "Сотрудник ресепшена")
+Person(patient, "Patient", "Пациент")
+
+System_Boundary(s1, "Patient Registration") {
+  System(system_excel, "Excel (Журнал записей)", "Регистрация пациентов")
+  System(system_patients, "Excel (Patients list)", "Список пациентов")
+}
+
+Rel(patient, admin, "Сообщает данные")
+Rel(admin, system_excel, "Вносит запись")
+Rel(admin, system_patients, "Обновляет список пациентов")
+@enduml
+
+
+
+
